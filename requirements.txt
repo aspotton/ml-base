@@ -1,0 +1,3 @@
+# Add the version of tensorflow that you need here.
+# If you know you will be using a GPU, use tensorflow-gpu as a dependency to speed up image booting.
+tensorflow
