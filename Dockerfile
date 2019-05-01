@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # install system dependencies
 RUN apt-get -qqy update \
- && apt-get -qqy upgrade \
+ && apt-get -qqy install libsm6 libxext6 libfontconfig1 libxrender1 \
  && apt-get -qqy install python3.6 python3-pip
 
 WORKDIR /code

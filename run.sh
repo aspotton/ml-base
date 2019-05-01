@@ -15,7 +15,7 @@ if [ -n "$RESULT" ]; then
 	TF_CPU_INSTALLED=1
 fi
 
-NVIDIA_DEVS=`ls -1 /dev/nvidia*`
+NVIDIA_DEVS=`ls -d1 /dev/nvidia* 2>/dev/null`
 if [ -n "$NVIDIA_DEVS" ]; then
 	DETECT_GPU=1
 	echo "GPU detected ..."
@@ -47,9 +47,23 @@ else
 	fi
 fi
 
+CUDA_LIBS=`ls -d1 /usr/local/cuda-* 2>/dev/null`
+
+if [ -n "$CUDA_LIBS" ]; then
+	export LD_LIBRARY_PATH=$CUDA_LIBS/lib64:$LD_LIBRARY_PATH
+fi
+
+# Setup local user to be the same - avoid permission issues
+if [ -n "$USER" -a -n "$UID" -a -n "$GID" ]; then
+	groupadd -g $GID $USER
+	useradd -g $GID -M -N $USER -d /code
+else
+	USER="root"
+fi
+
 ARGS="$@"
 if [ -n "$ARGS" ]; then
-	"$@"
+	su $USER -c "$@"
 else
-	/bin/bash
+	su $USER -c /bin/bash
 fi
