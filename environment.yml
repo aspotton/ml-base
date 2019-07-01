@@ -1,0 +1,10 @@
+name: base
+channels:
+- conda-forge
+- defaults
+dependencies:
+- python=3.6.7
+- pip
+- pip:
+  - jupyter
+  - tensorflow-gpu==1.12.3
