@@ -23,9 +23,4 @@ RUN conda env update --file /tmp/environment.yml
 
 ADD run.sh /run.sh
 
-ENV TINI_VERSION v0.16.1
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
-RUN chmod +x /usr/bin/tini
-
-ENTRYPOINT [ "/usr/bin/tini", "--" ]
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/run.sh" ]
