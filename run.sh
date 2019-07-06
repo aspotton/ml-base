@@ -10,7 +10,7 @@ fi
 
 ARGS="$@"
 if [ -n "$ARGS" ]; then
-	su -l $USER -c "/bin/bash -l -c 'conda activate base; $@'"
+	su $USER -c "/bin/bash -l -i -c '$@'"
 else
-	su -l $USER -c /bin/bash -l
+	su $USER -c "/bin/bash -l -i"
 fi
