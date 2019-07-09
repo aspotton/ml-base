@@ -8,9 +8,4 @@ else
 	USER="root"
 fi
 
-ARGS="$@"
-if [ -n "$ARGS" ]; then
-	su $USER -c "/bin/bash -l -i -c '$@'"
-else
-	su $USER -c "/bin/bash -l -i"
-fi
+$@
