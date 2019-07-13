@@ -8,4 +8,8 @@ else
 	USER="root"
 fi
 
-$@
+if [ -z "$@" ]; then
+	/bin/bash -l
+else
+	$@
+fi

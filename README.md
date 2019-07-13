@@ -43,7 +43,7 @@ Change to the project code directory. This will be mapped to the `/code` directo
 If this is the first time running you'll need to create and setup the container by running:
 
 ```
-docker run -it --name projectname --runtime=nvidia -e UID=$(id -u) -e GID=$(id -g) -e USER=$(whoami) -e DISPLAY="$DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd):/code -p 8000:8000 mlbase:cuda10 "/opt/conda/bin/conda env update --file /code/environment.yml"
+docker run -dt --name projectname --runtime=nvidia -e UID=$(id -u) -e GID=$(id -g) -e USER=$(whoami) -e DISPLAY="$DISPLAY" -v /tmp/.X11-unix:/tmp/.X11-unix -v $(pwd):/code -p 8000:8000 mlbase:cuda10 /bin/bash -l
 ```
 
 It can then be started with
@@ -55,6 +55,12 @@ docker start projectname
 To get a shell in the running container
 ```
 docker exec -it -u $(whoami) -e DISPLAY="$DISPLAY" projectname /bin/bash -l
+```
+
+At first run, setup the `ml` conda environment
+```
+sudo /opt/conda/bin/conda env update --file /code/environment.yml
+source activate ml
 ```
 
 #### Jupyter Notebook
